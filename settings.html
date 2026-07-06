@@ -24,7 +24,9 @@ img, svg {
 
 /* 侧边栏及交互元素禁止文本选中 */
 .sidebar, .sidebar-menu, .sidebar-footer, .sidebar-overlay,
-.header-logo-text, .account-btn, .contact-email a, button {
+.header-logo-text, .account-btn, .contact-email a,
+button, .toggle-switch, .toggle-slider, .setting-item, .back-btn,
+.section, .member-card, .modal, .modal-content {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -184,7 +186,7 @@ body.dark-mode .theme-toggle .icon-moon { display: block; }
 
 <header>
   <div class="header-left" onclick="toggleSidebar()">
-    <svg width="33" height="33" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width="30" height="30" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M10.8 1.8H12.6V3.6H14.4V5.4H16.2V7.2H18V9H19.8V10.8H21.6V12.6H23.4V14.4H25.2V16.2H27V25.2H25.2V27H1.8V25.2H0V1.8H1.8V0H10.8V1.8ZM5.4 21.6H21.6V19.8H19.8V18H18V16.2H16.2V14.4H14.4V12.6H12.6V10.8H10.8V9H9V7.2H7.2V5.4H5.4V21.6ZM25.2 1.8H27V9H25.2V7.2H23.4V5.4H21.6V3.6H19.8V1.8H18V0H25.2V1.8Z" fill="#48BDC6"/>
     </svg>
   </div>
