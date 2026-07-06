@@ -224,14 +224,14 @@ body.dark-mode .toast-item {
 @media (max-width: 480px) {
   .toast-container,
   .toast-item {
-    width: 280px;
+    width: min(240px, calc(100vw - 80px));
   }
 }
 
 @media (max-width: 340px) {
   .toast-container,
   .toast-item {
-    width: calc(100vw - 60px);
+    width: min(220px, calc(100vw - 90px));
   }
 }
 
@@ -437,6 +437,11 @@ body.dark-mode .form-group label {
   font-size: 14px;
   transition: border-color 0.3s;
   background: white;
+  color: #333;
+}
+
+.form-group input::placeholder {
+  color: #999;
 }
 
 body.dark-mode .form-group input {
