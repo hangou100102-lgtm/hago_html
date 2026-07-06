@@ -167,10 +167,6 @@ body.dark-mode .setting-item .setting-desc {
 
 /* 右上角深色模式快捷开关 */
 .theme-toggle {
-  position: absolute;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
   width: 36px;
   height: 36px;
   border: 2px solid #3aa6a6;
@@ -181,6 +177,8 @@ body.dark-mode .setting-item .setting-desc {
   align-items: center;
   justify-content: center;
   border-radius: 0;
+  margin-right: 10px;
+  padding: 0;
   transition: background 0.3s, color 0.3s, border-color 0.3s;
   user-select: none;
   -webkit-user-select: none;
@@ -249,19 +247,19 @@ body.dark-mode .theme-toggle .icon-moon { display: block; }
       </defs>
     </svg>
   </div>
-  <div class="header-right" style="display: none;">
+  <div class="header-right">
+    <button class="theme-toggle" id="themeToggle" aria-label="切换深色模式" onclick="toggleDarkMode()">
+      <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
+        <path d="M12 2V4M12 20V22M4.93 4.93L6.34 6.34M17.66 17.66L19.07 19.07M2 12H4M20 12H22M4.93 19.07L6.34 17.66M17.66 6.34L19.07 4.93" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+      </svg>
+    </button>
     <button class="account-btn" id="accountBtn" onclick="openAccountModal()">登录</button>
   </div>
 
-  <button class="theme-toggle" id="themeToggle" aria-label="切换深色模式" onclick="toggleDarkMode()">
-    <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
-      <path d="M12 2V4M12 20V22M4.93 4.93L6.34 6.34M17.66 17.66L19.07 19.07M2 12H4M20 12H22M4.93 19.07L6.34 17.66M17.66 6.34L19.07 4.93" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-    </svg>
-    <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-    </svg>
-  </button>
 </header>
 
 <div class="section">
