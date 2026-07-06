@@ -8,6 +8,7 @@
 <meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)">
 <meta name="darkreader-lock">
 <title>设置 - HAGo Studio</title>
+<link rel="icon" type="image/png" href="assets/logo/1.png">
 <link rel="stylesheet" href="styles.css">
 
 <style>
@@ -97,6 +98,46 @@ body.dark-mode .setting-item .setting-desc {
 .back-btn:hover {
   background: #2d8a8a;
 }
+
+/* 右上角深色模式快捷开关 */
+.theme-toggle {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border: 2px solid #3aa6a6;
+  background: #ffffff;
+  color: #3aa6a6;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0;
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.theme-toggle:hover {
+  background: #3aa6a6;
+  color: #ffffff;
+}
+
+.theme-toggle .icon-moon { display: none; }
+
+body.dark-mode .theme-toggle {
+  background: #2a2a2a;
+  color: #f5f5f5;
+  border-color: #f5f5f5;
+}
+
+body.dark-mode .theme-toggle:hover {
+  background: #f5f5f5;
+  color: #2a2a2a;
+}
+
+body.dark-mode .theme-toggle .icon-sun  { display: none; }
+body.dark-mode .theme-toggle .icon-moon { display: block; }
 </style>
 </head>
 <body>
@@ -119,7 +160,7 @@ body.dark-mode .setting-item .setting-desc {
 
 <header>
   <div class="header-left" onclick="toggleSidebar()">
-    <svg width="35" height="35" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width="33" height="33" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M10.8 1.8H12.6V3.6H14.4V5.4H16.2V7.2H18V9H19.8V10.8H21.6V12.6H23.4V14.4H25.2V16.2H27V25.2H25.2V27H1.8V25.2H0V1.8H1.8V0H10.8V1.8ZM5.4 21.6H21.6V19.8H19.8V18H18V16.2H16.2V14.4H14.4V12.6H12.6V10.8H10.8V9H9V7.2H7.2V5.4H5.4V21.6ZM25.2 1.8H27V9H25.2V7.2H23.4V5.4H21.6V3.6H19.8V1.8H18V0H25.2V1.8Z" fill="#48BDC6"/>
     </svg>
   </div>
@@ -138,9 +179,19 @@ body.dark-mode .setting-item .setting-desc {
       </defs>
     </svg>
   </div>
-  <div class="header-right">
+  <div class="header-right" style="display: none;">
     <button class="account-btn" id="accountBtn" onclick="openAccountModal()">登录</button>
   </div>
+
+  <button class="theme-toggle" id="themeToggle" aria-label="切换深色模式" onclick="toggleDarkMode()">
+    <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
+      <path d="M12 2V4M12 20V22M4.93 4.93L6.34 6.34M17.66 17.66L19.07 19.07M2 12H4M20 12H22M4.93 19.07L6.34 17.66M17.66 6.34L19.07 4.93" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+    <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+    </svg>
+  </button>
 </header>
 
 <div class="section">

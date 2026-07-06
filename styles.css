@@ -57,38 +57,6 @@ body.dark-mode .header-logo-text {
   color: #fff;
 }
 
-/* Dark Reader 图标保护：防止扩展在浅色页面反转 SVG 图标颜色导致图标消失 */
-.header-logo-text,
-.header-left svg,
-.header-center svg {
-  --darkreader-inline-bgcolor: transparent;
-  --darkreader-inline-border-bottom: transparent;
-  --darkreader-inline-border-left: transparent;
-  --darkreader-inline-border-right: transparent;
-  --darkreader-inline-border-top: transparent;
-  --darkreader-inline-boxshadow: none;
-  --darkreader-inline-outline: none;
-  --darkreader-inline-stroke: currentColor;
-  --darkreader-inline-fill: currentColor;
-  --darkreader-inline-color: currentColor;
-  isolation: isolate;
-  position: relative;
-}
-
-/* 对使用 currentColor 的 SVG 路径，强制保护原始颜色不被 Dark Reader 反转 */
-svg path[fill="currentColor"],
-svg rect[fill="currentColor"],
-svg circle[fill="currentColor"] {
-  color-scheme: light dark;
-}
-
-/* 当页面被 Dark Reader 接管为深色模式时，保持图标对比度 */
-@media (prefers-color-scheme: dark) {
-  body:not(.dark-mode) .header-logo-text {
-    color: #000;
-  }
-}
-
 .header-right {
   position: absolute;
   right: 20px;
