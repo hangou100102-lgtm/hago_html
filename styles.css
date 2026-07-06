@@ -1,0 +1,277 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+}
+
+body {
+  background: #e9e9e9;
+  padding-top: 70px;
+  transition: background 0.3s;
+}
+
+body.dark-mode {
+  background: #1a1a1a;
+}
+
+/* 顶栏 */
+header {
+  background: #ffffff;
+  height: 70px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 4px solid #3aa6a6;
+  z-index: 1000;
+  transition: background 0.3s;
+}
+
+body.dark-mode header {
+  background: #2a2a2a;
+}
+
+.header-left {
+  position: absolute;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.header-center {
+  display: flex;
+  align-items: center;
+}
+
+.header-logo-text {
+  color: #000;
+  transition: color 0.3s;
+}
+
+body.dark-mode .header-logo-text {
+  color: #fff;
+}
+
+/* Dark Reader 图标保护：防止扩展在浅色页面反转 SVG 图标颜色导致图标消失 */
+.header-logo-text,
+.header-left svg,
+.header-center svg {
+  --darkreader-inline-bgcolor: transparent;
+  --darkreader-inline-border-bottom: transparent;
+  --darkreader-inline-border-left: transparent;
+  --darkreader-inline-border-right: transparent;
+  --darkreader-inline-border-top: transparent;
+  --darkreader-inline-boxshadow: none;
+  --darkreader-inline-outline: none;
+  --darkreader-inline-stroke: currentColor;
+  --darkreader-inline-fill: currentColor;
+  --darkreader-inline-color: currentColor;
+  isolation: isolate;
+  position: relative;
+}
+
+/* 对使用 currentColor 的 SVG 路径，强制保护原始颜色不被 Dark Reader 反转 */
+svg path[fill="currentColor"],
+svg rect[fill="currentColor"],
+svg circle[fill="currentColor"] {
+  color-scheme: light dark;
+}
+
+/* 当页面被 Dark Reader 接管为深色模式时，保持图标对比度 */
+@media (prefers-color-scheme: dark) {
+  body:not(.dark-mode) .header-logo-text {
+    color: #000;
+  }
+}
+
+.header-right {
+  position: absolute;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* 信息卡片 */
+.section {
+  background: #ffffff;
+  margin: 20px;
+  padding: 25px;
+  position: relative;
+  transition: background 0.3s;
+}
+
+body.dark-mode .section {
+  background: #2a2a2a;
+}
+
+.section h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: #333;
+  transition: color 0.3s;
+}
+
+body.dark-mode .section h2 {
+  color: #fff;
+}
+
+.section p {
+  color: #888;
+  line-height: 1.8;
+  font-size: 18px;
+  transition: color 0.3s;
+}
+
+body.dark-mode .section p {
+  color: #aaa;
+}
+
+/* 账号按钮 */
+.account-btn {
+  padding: 8px 16px;
+  background: #3aa6a6;
+  color: white;
+  border: none;
+  border-radius: 0;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.account-btn:hover {
+  background: #2d8a8a;
+}
+
+.account-btn.logout {
+  background: #d9534f;
+}
+
+.account-btn.logout:hover {
+  background: #c9302c;
+}
+
+/* 侧滑菜单遮罩 */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0);
+  z-index: 2500;
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  transition: backdrop-filter 0.3s, -webkit-backdrop-filter 0.3s;
+}
+
+.sidebar-overlay.active {
+  display: block;
+  animation: sidebarFadeIn 0.3s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+.sidebar-overlay.closing {
+  display: block;
+  animation: sidebarFadeOut 0.3s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+@keyframes sidebarFadeIn {
+  from { background: rgba(0, 0, 0, 0); }
+  to { background: rgba(0, 0, 0, 0.25); }
+}
+
+@keyframes sidebarFadeOut {
+  from { background: rgba(0, 0, 0, 0.25); }
+  to { background: rgba(0, 0, 0, 0); }
+}
+
+body.advanced-materials .sidebar-overlay.active {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* 侧滑菜单 */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -280px;
+  width: 280px;
+  height: 100%;
+  background: #ffffff;
+  z-index: 3000;
+  padding-top: 70px;
+  border-right: 4px solid #3aa6a6;
+  transition: left 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+body.dark-mode .sidebar {
+  background: #2a2a2a;
+}
+
+.sidebar.open {
+  left: 0;
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-menu li {
+  border-bottom: 1px solid #eee;
+}
+
+body.dark-mode .sidebar-menu li {
+  border-color: #333;
+}
+
+.sidebar-menu li a {
+  display: block;
+  padding: 15px 20px;
+  color: #333;
+  text-decoration: none;
+  font-size: 16px;
+  transition: background 0.2s;
+}
+
+body.dark-mode .sidebar-menu li a {
+  color: #fff;
+}
+
+.sidebar-menu li a:hover {
+  background: #f5f5f5;
+}
+
+body.dark-mode .sidebar-menu li a:hover {
+  background: #333;
+}
+
+.sidebar-menu li a.active {
+  background: #3aa6a6;
+  color: white;
+}
+
+.sidebar-footer {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  padding: 0 20px;
+}
+
+.sidebar-footer p {
+  font-size: 12px;
+  color: #888;
+  line-height: 1.5;
+}
+
+body.dark-mode .sidebar-footer p {
+  color: #666;
+}

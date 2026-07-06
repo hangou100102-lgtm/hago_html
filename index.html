@@ -3,103 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HAGO Studio</title>
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)">
+<title>HAGo Studio</title>
+<link rel="stylesheet" href="styles.css">
 
 <style>
-/* 全局移除默认蓝色焦点轮廓与点击高亮 */
-*, *:focus, *:active {
-  outline: none !important;
-  -webkit-tap-highlight-color: transparent !important;
-}
-
-/* 自定义焦点指示器，保持键盘可访问性 */
-a:focus-visible,
-button:focus-visible,
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible {
-  outline: 2px solid #3aa6a6 !important;
-  outline-offset: 2px !important;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
-}
-
-body {
-  background: #e9e9e9;
-  padding-top: 70px;
-  transition: background 0.3s;
-}
-
-body.dark-mode {
-  background: #1a1a1a;
-}
-
-/* 顶栏 */
-header {
-  background: #ffffff;
-  height: 70px;
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-bottom: 4px solid #3aa6a6;
-  z-index: 1000;
-  transition: background 0.3s;
-}
-
-body.dark-mode header {
-  background: #2a2a2a;
-}
-
-.header-left {
-  position: absolute;
-  left: 20px;
-  display: flex;
-  align-items: center;
-}
-
-.header-center {
-  display: flex;
-  align-items: center;
-}
-
-.header-logo-text {
-  color: #000;
-  transition: color 0.3s;
-}
-
-body.dark-mode .header-logo-text {
-  color: #fff;
-}
-
-.header-right {
-  position: absolute;
-  right: 20px;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
-
-/* 信息卡片 */
-.section {
-  background: #ffffff;
-  margin: 20px;
-  padding: 25px;
-  position: relative;
-  transition: background 0.3s;
-}
-
-body.dark-mode .section {
-  background: #2a2a2a;
-}
+/* 首页特有样式：卡片角标、作品方块、弹窗、表单、账号卡片 */
 
 .section::after {
   content: "";
@@ -114,61 +25,15 @@ body.dark-mode .section {
 .work::after { background: #3aa6a6; }
 .info::after { background: #cfcfcf; }
 
-.section h2 {
-  font-size: 32px;
-  margin-bottom: 20px;
-  transition: color 0.3s;
-}
-
-body.dark-mode .section h2 {
-  color: #fff;
-}
-
-.section p {
-  color: #888;
-  line-height: 1.8;
-  font-size: 18px;
-  transition: color 0.3s;
-}
-
-body.dark-mode .section p {
-  color: #aaa;
-}
-
 .works {
   display: flex;
   gap: 30px;
 }
 
-/* 强制正方形 */
 .work-item {
   width: 90px;
   aspect-ratio: 1 / 1;
   background: #ddd;
-}
-
-/* 账号按钮 */
-.account-btn {
-  padding: 8px 16px;
-  background: #3aa6a6;
-  color: white;
-  border: none;
-  border-radius: 0;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.account-btn:hover {
-  background: #2d8a8a;
-}
-
-.account-btn.logout {
-  background: #d9534f;
-}
-
-.account-btn.logout:hover {
-  background: #c9302c;
 }
 
 /* 弹窗遮罩 */
@@ -483,193 +348,6 @@ body.dark-mode .form-group select {
   background: #5bc0de;
   color: white;
 }
-
-/* 侧滑菜单遮罩 */
-.sidebar-overlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0);
-  z-index: 2500;
-  backdrop-filter: blur(0px);
-  -webkit-backdrop-filter: blur(0px);
-  transition: backdrop-filter 0.3s, -webkit-backdrop-filter 0.3s;
-}
-
-.sidebar-overlay.active {
-  display: block;
-  animation: sidebarFadeIn 0.3s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
-}
-
-.sidebar-overlay.closing {
-  display: block;
-  animation: sidebarFadeOut 0.3s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
-}
-
-@keyframes sidebarFadeIn {
-  from {
-    background: rgba(0, 0, 0, 0);
-  }
-  to {
-    background: rgba(0, 0, 0, 0.25);
-  }
-}
-
-@keyframes sidebarFadeOut {
-  from {
-    background: rgba(0, 0, 0, 0.25);
-  }
-  to {
-    background: rgba(0, 0, 0, 0);
-  }
-}
-
-body.advanced-materials .sidebar-overlay.active {
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-
-/* 侧滑菜单 */
-.sidebar {
-  position: fixed;
-  top: 0;
-  left: -280px;
-  width: 280px;
-  height: 100%;
-  background: #ffffff;
-  z-index: 3000;
-  padding-top: 70px;
-  border-right: 4px solid #3aa6a6;
-  transition: left 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
-}
-
-body.dark-mode .sidebar {
-  background: #2a2a2a;
-}
-
-.sidebar.open {
-  left: 0;
-}
-
-/* 菜单列表 */
-.sidebar-menu {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.sidebar-menu li {
-  border-bottom: 1px solid #eee;
-}
-
-body.dark-mode .sidebar-menu li {
-  border-color: #333;
-}
-
-.sidebar-menu li a {
-  display: block;
-  padding: 15px 20px;
-  color: #333;
-  text-decoration: none;
-  font-size: 16px;
-  transition: background 0.2s;
-}
-
-body.dark-mode .sidebar-menu li a {
-  color: #fff;
-}
-
-.sidebar-menu li a:hover {
-  background: #f5f5f5;
-}
-
-body.dark-mode .sidebar-menu li a:hover {
-  background: #333;
-}
-
-.sidebar-menu li a.active {
-  background: #3aa6a6;
-  color: white;
-}
-
-/* 侧边栏中的按钮样式与链接一致 */
-.sidebar-menu li button {
-  display: block;
-  width: 100%;
-  padding: 15px 20px;
-  border: none;
-  background: transparent;
-  color: #333;
-  text-decoration: none;
-  font-size: 16px;
-  text-align: left;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-body.dark-mode .sidebar-menu li button {
-  color: #fff;
-}
-
-.sidebar-menu li button:hover {
-  background: #f5f5f5;
-}
-
-body.dark-mode .sidebar-menu li button:hover {
-  background: #333;
-}
-
-/* 强制保证侧边栏及其链接可点击，防止遮罩或上层元素拦截 */
-.sidebar,
-.sidebar a,
-.sidebar-menu,
-.sidebar-menu li,
-.sidebar-menu li a {
-  pointer-events: auto !important;
-}
-
-.sidebar {
-  z-index: 3000 !important;
-}
-
-.sidebar-overlay {
-  z-index: 2500 !important;
-}
-
-/* 菜单分隔线 */
-.sidebar-divider {
-  height: 1px;
-  background: #ddd;
-  margin: 10px 0;
-}
-
-/* 菜单底部信息 */
-.sidebar-footer {
-  position: absolute;
-  bottom: 20px;
-  left: 0;
-  right: 0;
-  padding: 0 20px;
-}
-
-.sidebar-footer p {
-  font-size: 12px;
-  color: #888;
-  line-height: 1.5;
-}
-
-body.dark-mode .sidebar-footer p {
-  color: #666;
-}
-
-/* Logo按钮 */
-.header-left {
-  cursor: pointer;
-}
-
 </style>
 </head>
 
@@ -684,11 +362,11 @@ body.dark-mode .sidebar-footer p {
     <li><a href="#home">首页</a></li>
     <li><a href="#about">关于我们</a></li>
     <li><a href="#services">服务项目</a></li>
+    <li><a href="#contact">联系我们</a></li>
+    <li><a href="#" onclick="openAccountModal()">账号管理</a></li>
+    <li><a href="settings.html">设置</a></li>
     <li><a href="#projects">项目作品</a></li>
     <li><a href="#team">团队成员</a></li>
-    <li><a href="#contact">联系我们</a></li>
-    <li><button type="button" onclick="openAccountModal()">账号管理</button></li>
-    <li><a href="settings.html">设置</a></li>
   </ul>
   <div class="sidebar-footer">
     <p>HAGo Studio</p>
@@ -775,19 +453,12 @@ body.dark-mode .sidebar-footer p {
       <label>确认密码</label>
       <input type="password" id="registerConfirmPassword" placeholder="请再次输入密码">
     </div>
-    <div class="form-group">
-      <label>邮箱</label>
-      <input type="email" id="registerEmail" placeholder="请输入邮箱">
-    </div>
     <button class="submit-btn" onclick="register()">注册</button>
     <div class="link-btn" onclick="showLogin()">已有账号？立即登录</div>
   </div>
 </div>
 
-<!-- 页面主体，首页锚点 -->
-<main id="home">
-
-<div class="section about" id="about">
+<div class="section about">
   <h2># 关于工作室</h2>
   <p>
     我们工作室的名字叫「HAGo Studio」<br><br>
@@ -798,18 +469,7 @@ body.dark-mode .sidebar-footer p {
   </p>
 </div>
 
-<div class="section" id="services">
-  <h2># 服务项目</h2>
-  <p>
-    游戏原型设计与开发<br><br>
-    《创游世界》脚本与玩法定制<br><br>
-    UniApp 跨平台应用开发<br><br>
-    游戏美术、UI 与界面设计<br><br>
-    玩法策划、数值平衡与测试反馈
-  </p>
-</div>
-
-<div class="section work" id="projects">
+<div class="section work">
   <h2># 代表作品集</h2>
   <div class="works">
     <div class="work-item"></div>
@@ -818,18 +478,8 @@ body.dark-mode .sidebar-footer p {
   </div>
 </div>
 
-<div class="section" id="team">
-  <h2># 团队成员</h2>
-  <p>
-    创始人 / 主策划：负责工作室整体方向与项目策划<br><br>
-    程序开发：使用《创游世界》引擎与 UniApp 实现游戏与软件功能<br><br>
-    美术设计：负责角色、场景、UI 与视觉表现<br><br>
-    我们是一群热爱游戏创作的伙伴，欢迎志同道合的朋友加入
-  </p>
-</div>
-
-<div class="section info" id="contact">
-  <h2># 联系我们</h2>
+<div class="section info">
+  <h2># 常规信息</h2>
   <p>
     成立时间：2023年10月15日<br><br>
     工作室定位：游戏开发、软件制作<br><br>
@@ -851,17 +501,11 @@ body.dark-mode .sidebar-footer p {
       <span class="info-value" id="accType"></span>
     </div>
     <div class="info-row">
-      <span class="info-label">邮箱</span>
-      <span class="info-value" id="accEmail"></span>
-    </div>
-    <div class="info-row">
       <span class="info-label">注册时间</span>
       <span class="info-value" id="accRegTime"></span>
     </div>
   </div>
 </div>
-
-</main>
 
 <script>
 var loginType = 'normal';
@@ -951,6 +595,10 @@ function setLoginType(type) {
   document.getElementById('loginTypeNormal').classList.remove('active');
   document.getElementById('loginTypeStudio').classList.remove('active');
   document.getElementById('loginType' + (type === 'normal' ? 'Normal' : 'Studio')).classList.add('active');
+  document.getElementById('loginUsername').value = '';
+  document.getElementById('loginPassword').value = '';
+  document.getElementById('loginMessage').textContent = '';
+  document.getElementById('loginMessage').className = 'message';
 }
 
 function setRegisterType(type) {
@@ -958,6 +606,11 @@ function setRegisterType(type) {
   document.getElementById('registerTypeNormal').classList.remove('active');
   document.getElementById('registerTypeStudio').classList.remove('active');
   document.getElementById('registerType' + (type === 'normal' ? 'Normal' : 'Studio')).classList.add('active');
+  document.getElementById('registerUsername').value = '';
+  document.getElementById('registerPassword').value = '';
+  document.getElementById('registerConfirmPassword').value = '';
+  document.getElementById('registerMessage').textContent = '';
+  document.getElementById('registerMessage').className = 'message';
 }
 
 function showMessage(elementId, message, type) {
@@ -966,13 +619,21 @@ function showMessage(elementId, message, type) {
   msg.className = 'message ' + type;
 }
 
+function simpleHash(str) {
+  var hash = 0;
+  for (var i = 0; i < str.length; i++) {
+    hash = ((hash << 5) - hash) + str.charCodeAt(i);
+    hash |= 0;
+  }
+  return 'h' + hash.toString(36);
+}
+
 function register() {
   var username = document.getElementById('registerUsername').value.trim();
   var password = document.getElementById('registerPassword').value;
-  var confirmPassword = document.getElementById('registerConfirmPassword').value;
-  var email = document.getElementById('registerEmail').value.trim();
+  var confirmPassword = document.getElementById('registerConfirmPassword').value.trim();
 
-  if (!username || !password || !confirmPassword || !email) {
+  if (!username || !password || !confirmPassword) {
     showMessage('registerMessage', '请填写所有字段', 'error');
     return;
   }
@@ -997,8 +658,7 @@ function register() {
 
   var user = {
     username: username,
-    password: password,
-    email: email,
+    password: simpleHash(password),
     type: registerType,
     regTime: new Date().toLocaleString('zh-CN')
   };
@@ -1013,7 +673,6 @@ function register() {
     document.getElementById('registerUsername').value = '';
     document.getElementById('registerPassword').value = '';
     document.getElementById('registerConfirmPassword').value = '';
-    document.getElementById('registerEmail').value = '';
   }, 1500);
 }
 
@@ -1027,8 +686,9 @@ function login() {
   }
 
   var users = JSON.parse(localStorage.getItem('hago_users')) || [];
+  var hashed = simpleHash(password);
   var user = users.find(function(u) {
-    return u.username === username && u.password === password && u.type === loginType;
+    return u.username === username && u.password === hashed && u.type === loginType;
   });
 
   if (!user) {
@@ -1066,7 +726,6 @@ function showUserInfo() {
     (currentUser.type === 'studio' ? '工作室账号' : '普通账号') + '</span>';
   document.getElementById('accType').innerHTML = typeBadge;
   
-  document.getElementById('accEmail').textContent = currentUser.email;
   document.getElementById('accRegTime').textContent = currentUser.regTime;
 }
 
