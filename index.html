@@ -186,7 +186,7 @@ body.dark-mode .contact-email {
   top: 70px;
   right: 0;
   z-index: 10000;
-  width: 360px;
+  width: min(360px, calc(100vw - 24px));
 }
 
 .toast-item {
@@ -198,7 +198,7 @@ body.dark-mode .contact-email {
   color: #333;
   border-left: 4px solid #d9534f;
   font-size: 14px;
-  width: 360px;
+  width: min(360px, calc(100vw - 24px));
   box-sizing: border-box;
   transform: translateX(100%);
   box-shadow: -2px 2px 8px rgba(0, 0, 0, 0.15);
@@ -279,7 +279,7 @@ body.advanced-materials .modal-overlay.active {
 }
 
 body.advanced-materials .modal-overlay.closing {
-  animation: fadeOutOverlayBlur 0.3s ease-out forwards;
+  animation: fadeOutOverlayBlur 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 @keyframes fadeInOverlayBlur {
@@ -337,11 +337,11 @@ body.dark-mode .modal .close-btn:hover {
 }
 
 .modal-overlay.active .modal {
-  animation: slideUpBounce 0.3s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+  animation: slideUpBounce 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 .modal-overlay.closing .modal {
-  animation: slideDownClose 0.3s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+  animation: slideDownClose 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 @keyframes slideUpBounce {
@@ -477,7 +477,7 @@ body.dark-mode .form-group select {
   width: 50%;
   height: 100%;
   background: #3aa6a6;
-  transition: transform 0.3s ease-out;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   z-index: 0;
 }
 
@@ -766,7 +766,7 @@ body.dark-mode .theme-toggle .icon-moon { display: block; }
     <div class="account-type-switch" id="loginTypeSwitch">
       <div class="switch-indicator"></div>
       <button id="loginTypeNormal" class="active" onclick="setLoginType('normal')">普通账号</button>
-      <button id="loginTypeStudio" onclick="setLoginType('studio')">工作室账号</button>
+      <button id="loginTypeStudio" onclick="setLoginType('studio')">HAGo账号</button>
     </div>
     <div class="form-group">
       <label>账号</label>
@@ -790,7 +790,7 @@ body.dark-mode .theme-toggle .icon-moon { display: block; }
     <div class="account-type-switch" id="registerTypeSwitch">
       <div class="switch-indicator"></div>
       <button id="registerTypeNormal" class="active" onclick="setRegisterType('normal')">普通账号</button>
-      <button id="registerTypeStudio" onclick="setRegisterType('studio')">工作室账号</button>
+      <button id="registerTypeStudio" onclick="setRegisterType('studio')">HAGo账号</button>
     </div>
     <div class="form-group">
       <label>账号</label>
@@ -821,13 +821,13 @@ body.dark-mode .theme-toggle .icon-moon { display: block; }
 </div>
 
 <div class="section team" id="team">
-  <h2># 工作室成员名单</h2>
+  <h2># 成员名单</h2>
   <div class="members">
     <div class="member-card">
       <div class="member-avatar"><img src="assets/touxiang/mmexport1783330642230.jpg" alt="憨狗哈"></div>
       <div class="member-info">
         <div class="member-name">憨狗哈</div>
-        <div class="member-role">工作室创始人</div>
+        <div class="member-role">创始人</div>
       </div>
     </div>
     <div class="member-card">
@@ -932,7 +932,9 @@ function openAccountModal() {
     sidebar.classList.remove('open');
     overlay.classList.remove('active');
     overlay.classList.add('closing');
-    setTimeout(function() { overlay.classList.remove('closing'); }, 300);
+    setTimeout(function() {
+      overlay.classList.remove('closing');
+    }, 500);
   }
   document.getElementById('loginModal').classList.add('active');
 }
@@ -947,7 +949,7 @@ function toggleSidebar() {
     overlay.classList.add('closing');
     setTimeout(function() {
       overlay.classList.remove('closing');
-    }, 300);
+    }, 400);
   } else {
     sidebar.classList.add('open');
     overlay.classList.remove('closing');
@@ -1074,7 +1076,7 @@ function showUserInfo() {
   document.getElementById('accUsername').textContent = currentUser.username;
   
   var typeBadge = '<span class="account-badge ' + (currentUser.type === 'studio' ? 'studio' : 'normal') + '">' + 
-    (currentUser.type === 'studio' ? '工作室账号' : '普通账号') + '</span>';
+    (currentUser.type === 'studio' ? 'HAGo账号' : '普通账号') + '</span>';
   document.getElementById('accType').innerHTML = typeBadge;
   
   document.getElementById('accRegTime').textContent = currentUser.regTime;
