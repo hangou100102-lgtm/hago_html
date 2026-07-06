@@ -112,7 +112,7 @@ button, .toggle-switch, .toggle-slider, .setting-item, .back-btn,
 }
 
 body.dark-mode .member-card {
-  background: #2a2a2a;
+  background: #222222;
 }
 
 .member-avatar {
@@ -167,7 +167,7 @@ body.dark-mode .member-info .member-role {
 }
 
 body.dark-mode .contact-email {
-  background: #2a2a2a;
+  background: #222222;
 }
 
 .contact-email a {
@@ -219,6 +219,20 @@ body.dark-mode .toast-item {
   background: #3a1a1a;
   color: #fff;
   box-shadow: -2px 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+@media (max-width: 480px) {
+  .toast-container,
+  .toast-item {
+    width: 280px;
+  }
+}
+
+@media (max-width: 340px) {
+  .toast-container,
+  .toast-item {
+    width: calc(100vw - 60px);
+  }
 }
 
 /* 弹窗遮罩 */
