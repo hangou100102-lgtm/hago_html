@@ -12,6 +12,31 @@
 <link rel="stylesheet" href="styles.css">
 
 <style>
+/* 全局禁用选中：所有元素默认不可选中 */
+* {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+*::before, *::after {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* 全局选中背景透明化：即便被选中也不显示蓝底 */
+::selection {
+  background: transparent;
+  color: inherit;
+}
+
+::-moz-selection {
+  background: transparent;
+  color: inherit;
+}
+
 /* 全局禁止图标被选中/复制/拖拽 */
 img, svg {
   -webkit-user-select: none;
@@ -19,6 +44,15 @@ img, svg {
   -ms-user-select: none;
   user-select: none;
   -webkit-user-drag: none;
+  -webkit-tap-highlight-color: transparent;
+  pointer-events: none;
+}
+
+/* 交互元素（输入框除外）聚焦时去除外框蓝底 */
+*:focus, *:focus-visible, *:active {
+  outline: none !important;
+  outline-color: transparent !important;
+  outline-width: 0 !important;
   -webkit-tap-highlight-color: transparent;
 }
 
