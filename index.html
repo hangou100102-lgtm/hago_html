@@ -1,136 +1,980 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="darkreader-lock">
-    <title>GitHub 风格深色示例</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HAGO Studio</title>
 
-        body {
-            background: #0d1117;
-            color: #c9d1d9;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            padding: 24px;
-            line-height: 1.5;
-        }
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+}
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
+body {
+  background: #e9e9e9;
+  padding-top: 70px;
+  transition: background 0.3s;
+}
 
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px 0;
-            border-bottom: 1px solid #30363d;
-            margin-bottom: 32px;
-        }
+body.dark-mode {
+  background: #1a1a1a;
+}
 
-        .logo {
-            font-weight: 600;
-            font-size: 18px;
-            color: #f0f6fc;
-        }
+/* 顶栏 */
+header {
+  background: #ffffff;
+  height: 70px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 4px solid #3aa6a6;
+  z-index: 1000;
+  transition: background 0.3s;
+}
 
-        .nav-links a {
-            color: #8b949e;
-            text-decoration: none;
-            margin-left: 20px;
-            font-size: 14px;
-        }
+body.dark-mode header {
+  background: #2a2a2a;
+}
 
-        .nav-links a:hover {
-            color: #58a6ff;
-        }
+.header-left {
+  position: absolute;
+  left: 20px;
+  display: flex;
+  align-items: center;
+}
 
-        .repo-card {
-            background: #161b22;
-            border: 1px solid #30363d;
-            border-radius: 12px;
-            padding: 24px 28px;
-            margin-bottom: 24px;
-        }
+.header-center {
+  display: flex;
+  align-items: center;
+}
 
-        .repo-card h2 {
-            font-size: 20px;
-            font-weight: 600;
-            color: #58a6ff;
-            margin-bottom: 6px;
-        }
+.header-right {
+  position: absolute;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
 
-        .repo-card p {
-            color: #8b949e;
-            font-size: 14px;
-        }
+/* 信息卡片 */
+.section {
+  background: #ffffff;
+  margin: 20px;
+  padding: 25px;
+  position: relative;
+  transition: background 0.3s;
+}
 
-        .repo-meta {
-            margin-top: 12px;
-            font-size: 12px;
-            color: #8b949e;
-            display: flex;
-            gap: 16px;
-        }
+body.dark-mode .section {
+  background: #2a2a2a;
+}
 
-        .repo-meta span {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
+.section::after {
+  content: "";
+  width: 22px;
+  height: 22px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
 
-        .btn {
-            background: #238636;
-            color: #fff;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 8px;
-            font-weight: 500;
-            font-size: 14px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
+.about::after { background: #d9534f; }
+.work::after { background: #3aa6a6; }
+.info::after { background: #cfcfcf; }
 
-        .btn:hover {
-            background: #2ea043;
-        }
+.section h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+  transition: color 0.3s;
+}
 
-        .footer {
-            margin-top: 40px;
-            padding-top: 16px;
-            border-top: 1px solid #30363d;
-            text-align: center;
-            font-size: 12px;
-            color: #484f58;
-        }
+body.dark-mode .section h2 {
+  color: #fff;
+}
 
-        .footer a {
-            color: #58a6ff;
-            text-decoration: none;
-        }
-    </style>
+.section p {
+  color: #888;
+  line-height: 1.8;
+  font-size: 18px;
+  transition: color 0.3s;
+}
+
+body.dark-mode .section p {
+  color: #aaa;
+}
+
+.works {
+  display: flex;
+  gap: 30px;
+}
+
+/* 强制正方形 */
+.work-item {
+  width: 90px;
+  aspect-ratio: 1 / 1;
+  background: #ddd;
+}
+
+/* 账号按钮 */
+.account-btn {
+  padding: 8px 16px;
+  background: #3aa6a6;
+  color: white;
+  border: none;
+  border-radius: 0;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.account-btn:hover {
+  background: #2d8a8a;
+}
+
+.account-btn.logout {
+  background: #d9534f;
+}
+
+.account-btn.logout:hover {
+  background: #c9302c;
+}
+
+/* 弹窗遮罩 */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0);
+  z-index: 2000;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  transition: backdrop-filter 0.3s, -webkit-backdrop-filter 0.3s;
+}
+
+.modal-overlay.active {
+  display: flex;
+  animation: fadeInOverlay 0.4s ease-out forwards;
+}
+
+.modal-overlay.closing {
+  display: flex;
+  animation: fadeOutOverlay 0.3s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+@keyframes fadeInOverlay {
+  from {
+    background: rgba(0, 0, 0, 0);
+  }
+  to {
+    background: rgba(0, 0, 0, 0.25);
+  }
+}
+
+@keyframes fadeOutOverlay {
+  from {
+    background: rgba(0, 0, 0, 0.25);
+  }
+  to {
+    background: rgba(0, 0, 0, 0);
+  }
+}
+
+body.advanced-materials .modal-overlay.active {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* 弹窗 */
+.modal {
+  background: #ffffff;
+  width: 90%;
+  max-width: 400px;
+  border-radius: 0;
+  padding: 25px;
+  position: relative;
+  border-bottom: 4px solid #3aa6a6;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: background 0.3s;
+}
+
+body.dark-mode .modal {
+  background: #2a2a2a;
+}
+
+.modal-overlay.active .modal {
+  animation: slideUpBounce 0.3s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+.modal-overlay.closing .modal {
+  animation: slideDownClose 0.3s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+@keyframes slideUpBounce {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDownClose {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+}
+
+.modal .close-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 35px;
+  height: 35px;
+  border: none;
+  background: #d9534f;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0;
+  border-radius: 0;
+}
+
+.modal h3 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+  transition: color 0.3s;
+}
+
+body.dark-mode .modal h3 {
+  color: #fff;
+}
+
+/* 表单 */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #555;
+  transition: color 0.3s;
+}
+
+body.dark-mode .form-group label {
+  color: #aaa;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 0;
+  font-size: 14px;
+  transition: border-color 0.3s;
+  background: white;
+}
+
+body.dark-mode .form-group input {
+  background: #333;
+  border-color: #444;
+  color: #fff;
+}
+
+body.dark-mode .form-group input::placeholder {
+  color: #666;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #3aa6a6;
+}
+
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 0;
+  font-size: 14px;
+  background: white;
+}
+
+body.dark-mode .form-group select {
+  background: #333;
+  border-color: #444;
+  color: #fff;
+}
+
+.form-group select:focus {
+  outline: none;
+  border-color: #3aa6a6;
+}
+
+/* 账号类型切换 */
+.account-type-switch {
+  display: flex;
+  margin-bottom: 20px;
+  border: 2px solid #ddd;
+  border-radius: 0;
+  overflow: hidden;
+}
+
+.account-type-switch button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background: #f5f5f5;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.account-type-switch button.active {
+  background: #3aa6a6;
+  color: white;
+}
+
+/* 提交按钮 */
+.submit-btn {
+  width: 100%;
+  padding: 12px;
+  background: #3aa6a6;
+  color: white;
+  border: none;
+  border-radius: 0;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.submit-btn:hover {
+  background: #2d8a8a;
+}
+
+/* 链接 */
+.link-btn {
+  display: block;
+  text-align: center;
+  margin-top: 15px;
+  color: #3aa6a6;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.link-btn:hover {
+  text-decoration: underline;
+}
+
+/* 提示信息 */
+.message {
+  padding: 10px;
+  border-radius: 0;
+  margin-bottom: 15px;
+  font-size: 14px;
+  display: none;
+}
+
+.message.success {
+  background: #d4edda;
+  color: #155724;
+  display: block;
+}
+
+.message.error {
+  background: #f8d7da;
+  color: #721c24;
+  display: block;
+}
+
+/* 账号信息卡片 */
+.account-info {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 0;
+  margin-top: 20px;
+}
+
+.account-info h4 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.account-info .info-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.account-info .info-row:last-child {
+  border-bottom: none;
+}
+
+.account-info .info-label {
+  color: #888;
+}
+
+.account-info .info-value {
+  color: #333;
+  font-weight: 500;
+}
+
+.account-info .account-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 0;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.account-info .account-badge.studio {
+  background: #3aa6a6;
+  color: white;
+}
+
+.account-info .account-badge.normal {
+  background: #5bc0de;
+  color: white;
+}
+
+/* 侧滑菜单遮罩 */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0);
+  z-index: 2500;
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  transition: backdrop-filter 0.3s, -webkit-backdrop-filter 0.3s;
+}
+
+.sidebar-overlay.active {
+  display: block;
+  animation: sidebarFadeIn 0.3s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+.sidebar-overlay.closing {
+  display: block;
+  animation: sidebarFadeOut 0.3s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+@keyframes sidebarFadeIn {
+  from {
+    background: rgba(0, 0, 0, 0);
+  }
+  to {
+    background: rgba(0, 0, 0, 0.25);
+  }
+}
+
+@keyframes sidebarFadeOut {
+  from {
+    background: rgba(0, 0, 0, 0.25);
+  }
+  to {
+    background: rgba(0, 0, 0, 0);
+  }
+}
+
+body.advanced-materials .sidebar-overlay.active {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* 侧滑菜单 */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -280px;
+  width: 280px;
+  height: 100%;
+  background: #ffffff;
+  z-index: 3000;
+  padding-top: 70px;
+  border-right: 4px solid #3aa6a6;
+  transition: left 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+body.dark-mode .sidebar {
+  background: #2a2a2a;
+}
+
+.sidebar.open {
+  left: 0;
+}
+
+/* 菜单列表 */
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-menu li {
+  border-bottom: 1px solid #eee;
+}
+
+body.dark-mode .sidebar-menu li {
+  border-color: #333;
+}
+
+.sidebar-menu li a {
+  display: block;
+  padding: 15px 20px;
+  color: #333;
+  text-decoration: none;
+  font-size: 16px;
+  transition: background 0.2s;
+}
+
+body.dark-mode .sidebar-menu li a {
+  color: #fff;
+}
+
+.sidebar-menu li a:hover {
+  background: #f5f5f5;
+}
+
+body.dark-mode .sidebar-menu li a:hover {
+  background: #333;
+}
+
+.sidebar-menu li a.active {
+  background: #3aa6a6;
+  color: white;
+}
+
+/* 菜单分隔线 */
+.sidebar-divider {
+  height: 1px;
+  background: #ddd;
+  margin: 10px 0;
+}
+
+/* 菜单底部信息 */
+.sidebar-footer {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  padding: 0 20px;
+}
+
+.sidebar-footer p {
+  font-size: 12px;
+  color: #888;
+  line-height: 1.5;
+}
+
+body.dark-mode .sidebar-footer p {
+  color: #666;
+}
+
+/* Logo按钮 */
+.header-left {
+  cursor: pointer;
+}
+
+</style>
 </head>
+
 <body>
-    <div class="container">
-        <nav class="nav">
-            <div class="nav-links">
-                <a href="#">探索</a>
-                <a href="#">关于</a>
-                <a href="#">登录</a>
-            </div>
-        </nav>
 
-        <button class="btn">New Issue</button>
+<!-- 侧滑菜单遮罩 -->
+<div id="sidebarOverlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
 
-        <footer class="footer">
-            &copy; 2026 · 基于 <a href="#">GitHub 设计</a>
-        </footer>
+<!-- 侧滑菜单 -->
+<div id="sidebar" class="sidebar">
+  <ul class="sidebar-menu">
+    <li><a href="#home">首页</a></li>
+    <li><a href="#about">关于我们</a></li>
+    <li><a href="#services">服务项目</a></li>
+    <li><a href="#contact">联系我们</a></li>
+    <li><a href="#" onclick="openAccountModal()">账号管理</a></li>
+    <li><a href="settings.html">设置</a></li>
+    <li><a href="#projects">项目作品</a></li>
+    <li><a href="#team">团队成员</a></li>
+  </ul>
+  <div class="sidebar-footer">
+    <p>HAGo Studio</p>
+    <p>成立于2023年10月15日</p>
+    <p>专注游戏创作</p>
+  </div>
+</div>
+
+<header>
+
+  <div class="header-left" onclick="toggleSidebar()">
+    <img src="assets/logo/1.png" alt="HAGo Logo" style="height: 35px; width: 35px;">
+  </div>
+
+  <div class="header-center">
+    <svg width="116" height="27" viewBox="0 0 116 27" fill="none"
+         xmlns="http://www.w3.org/2000/svg">
+      <g clip-path="url(#clip0_1_1457)">
+        <path d="M5.27273 10.8H15.8182V12.6H17.5758V14.4H19.3333V16.2H5.27273V27H0V0H5.27273V10.8ZM26.3636 27H21.0909V0H26.3636V27Z" fill="black"/>
+        <path d="M54.4849 1.8H56.2424V3.6H58V27H52.7273V5.4H36.9091V10.8H47.4545V12.6H49.2121V14.4H50.9697V16.2H36.9091V27H31.6364V0H54.4849V1.8Z" fill="black"/>
+        <path d="M114.242 7.2H116V25.2H114.242V27H96.6667V25.2H94.9091V7.2H96.6667V5.4H114.242V7.2ZM100.182 21.6H110.727V10.8H100.182V21.6Z" fill="black"/>
+        <path d="M86.1212 1.8H87.8788V3.6H89.6364V9H86.1212V7.2H84.3636V5.4H68.5455V21.6H77.3333V23.4H79.0909V25.2H80.8485V27H66.7879V25.2H65.0303V23.4H63.2727V0H86.1212V1.8ZM86.1212 14.4H87.8788V16.2H89.6364V27H84.3636V18H77.3333V16.2H75.5758V14.4H73.8182V12.6H86.1212V14.4Z" fill="black"/>
+      </g>
+      <defs>
+        <clipPath id="clip0_1_1457">
+          <rect width="116" height="27" fill="white"/>
+        </clipPath>
+      </defs>
+    </svg>
+  </div>
+
+  <div class="header-right">
+    <button id="loginBtn" class="account-btn" style="display: block;">登录</button>
+    <button id="logoutBtn" class="account-btn logout" style="display: none;">退出</button>
+    <div id="userInfo" style="display: none; margin-right: 15px; font-size: 14px; color: #333;"></div>
+  </div>
+
+</header>
+
+<!-- 登录弹窗 -->
+<div id="loginModal" class="modal-overlay">
+  <div class="modal">
+    <button class="close-btn" onclick="closeModal('loginModal')">&times;</button>
+    <h3>登录</h3>
+    <div id="loginMessage" class="message"></div>
+    <div class="account-type-switch">
+      <button id="loginTypeNormal" class="active" onclick="setLoginType('normal')">普通账号</button>
+      <button id="loginTypeStudio" onclick="setLoginType('studio')">工作室账号</button>
     </div>
+    <div class="form-group">
+      <label>账号</label>
+      <input type="text" id="loginUsername" placeholder="请输入账号">
+    </div>
+    <div class="form-group">
+      <label>密码</label>
+      <input type="password" id="loginPassword" placeholder="请输入密码">
+    </div>
+    <button class="submit-btn" onclick="login()">登录</button>
+    <div class="link-btn" onclick="showRegister()">还没有账号？立即注册</div>
+  </div>
+</div>
+
+<!-- 注册弹窗 -->
+<div id="registerModal" class="modal-overlay">
+  <div class="modal">
+    <button class="close-btn" onclick="closeModal('registerModal')">&times;</button>
+    <h3>注册</h3>
+    <div id="registerMessage" class="message"></div>
+    <div class="account-type-switch">
+      <button id="registerTypeNormal" class="active" onclick="setRegisterType('normal')">普通账号</button>
+      <button id="registerTypeStudio" onclick="setRegisterType('studio')">工作室账号</button>
+    </div>
+    <div class="form-group">
+      <label>账号</label>
+      <input type="text" id="registerUsername" placeholder="请输入账号">
+    </div>
+    <div class="form-group">
+      <label>密码</label>
+      <input type="password" id="registerPassword" placeholder="请输入密码">
+    </div>
+    <div class="form-group">
+      <label>确认密码</label>
+      <input type="password" id="registerConfirmPassword" placeholder="请再次输入密码">
+    </div>
+    <div class="form-group">
+      <label>邮箱</label>
+      <input type="email" id="registerEmail" placeholder="请输入邮箱">
+    </div>
+    <button class="submit-btn" onclick="register()">注册</button>
+    <div class="link-btn" onclick="showLogin()">已有账号？立即登录</div>
+  </div>
+</div>
+
+<div class="section about">
+  <h2># 关于工作室</h2>
+  <p>
+    我们工作室的名字叫「HAGo Studio」<br><br>
+    「HAGo Studio」成立于2023年10月15日，是在《创游世界》中成立的游戏开发工作室<br><br>
+    我们使用《创游世界》的游戏制作引擎、UniApp跨平台语言<br><br>
+    以制作一些游戏或软件<br><br>
+    我们热爱游戏创作，致力于用创意和技术打造精彩的游戏体验
+  </p>
+</div>
+
+<div class="section work">
+  <h2># 代表作品集</h2>
+  <div class="works">
+    <div class="work-item"></div>
+    <div class="work-item"></div>
+    <div class="work-item"></div>
+  </div>
+</div>
+
+<div class="section info">
+  <h2># 常规信息</h2>
+  <p>
+    成立时间：2023年10月15日<br><br>
+    工作室定位：游戏开发、软件制作<br><br>
+    技术栈：《创游世界》游戏引擎、UniApp跨平台开发<br><br>
+    核心优势：创意设计、玩法创新、快速迭代、合作共创<br><br>
+    欢迎志同道合的伙伴加入，一起创造精彩作品
+  </p>
+</div>
+
+<div class="section" id="accountSection" style="display: none;">
+  <h2># 账号信息</h2>
+  <div class="account-info">
+    <div class="info-row">
+      <span class="info-label">账号</span>
+      <span class="info-value" id="accUsername"></span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">账号类型</span>
+      <span class="info-value" id="accType"></span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">邮箱</span>
+      <span class="info-value" id="accEmail"></span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">注册时间</span>
+      <span class="info-value" id="accRegTime"></span>
+    </div>
+  </div>
+</div>
+
+<script>
+var loginType = 'normal';
+var registerType = 'normal';
+var currentUser = null;
+
+function init() {
+  checkLoginStatus();
+  loadDarkMode();
+  loadAdvancedMaterials();
+  document.getElementById('loginBtn').addEventListener('click', showLogin);
+  document.getElementById('logoutBtn').addEventListener('click', logout);
+}
+
+function checkLoginStatus() {
+  var savedUser = localStorage.getItem('hago_user');
+  if (savedUser) {
+    currentUser = JSON.parse(savedUser);
+    showUserInfo();
+  }
+}
+
+function loadDarkMode() {
+  var isDark = localStorage.getItem('hago_dark_mode') === 'true';
+  if (isDark) {
+    document.body.classList.add('dark-mode');
+  }
+}
+
+function loadAdvancedMaterials() {
+  var isEnabled = localStorage.getItem('hago_advanced_materials') === 'true';
+  if (isEnabled) {
+    document.body.classList.add('advanced-materials');
+  }
+}
+
+function showLogin() {
+  document.getElementById('loginModal').classList.add('active');
+}
+
+function showRegister() {
+  closeModal('loginModal');
+  document.getElementById('registerModal').classList.add('active');
+}
+
+function openAccountModal() {
+  var sidebar = document.getElementById('sidebar');
+  var overlay = document.getElementById('sidebarOverlay');
+  if (sidebar.classList.contains('open')) {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('active');
+    overlay.classList.add('closing');
+    setTimeout(function() { overlay.classList.remove('closing'); }, 300);
+  }
+  document.getElementById('loginModal').classList.add('active');
+}
+
+function toggleSidebar() {
+  var sidebar = document.getElementById('sidebar');
+  var overlay = document.getElementById('sidebarOverlay');
+  
+  if (sidebar.classList.contains('open')) {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('active');
+    overlay.classList.add('closing');
+    setTimeout(function() {
+      overlay.classList.remove('closing');
+    }, 300);
+  } else {
+    sidebar.classList.add('open');
+    overlay.classList.remove('closing');
+    overlay.classList.add('active');
+  }
+}
+
+function closeModal(modalId) {
+  var modal = document.getElementById(modalId);
+  modal.classList.remove('active');
+  modal.classList.add('closing');
+  setTimeout(function() {
+    modal.classList.remove('closing');
+  }, 300);
+}
+
+function setLoginType(type) {
+  loginType = type;
+  document.getElementById('loginTypeNormal').classList.remove('active');
+  document.getElementById('loginTypeStudio').classList.remove('active');
+  document.getElementById('loginType' + (type === 'normal' ? 'Normal' : 'Studio')).classList.add('active');
+}
+
+function setRegisterType(type) {
+  registerType = type;
+  document.getElementById('registerTypeNormal').classList.remove('active');
+  document.getElementById('registerTypeStudio').classList.remove('active');
+  document.getElementById('registerType' + (type === 'normal' ? 'Normal' : 'Studio')).classList.add('active');
+}
+
+function showMessage(elementId, message, type) {
+  var msg = document.getElementById(elementId);
+  msg.textContent = message;
+  msg.className = 'message ' + type;
+}
+
+function register() {
+  var username = document.getElementById('registerUsername').value.trim();
+  var password = document.getElementById('registerPassword').value;
+  var confirmPassword = document.getElementById('registerConfirmPassword').value;
+  var email = document.getElementById('registerEmail').value.trim();
+
+  if (!username || !password || !confirmPassword || !email) {
+    showMessage('registerMessage', '请填写所有字段', 'error');
+    return;
+  }
+
+  if (password !== confirmPassword) {
+    showMessage('registerMessage', '两次输入的密码不一致', 'error');
+    return;
+  }
+
+  if (password.length < 6) {
+    showMessage('registerMessage', '密码长度不能少于6位', 'error');
+    return;
+  }
+
+  var users = JSON.parse(localStorage.getItem('hago_users')) || [];
+  var exists = users.some(function(u) { return u.username === username; });
+
+  if (exists) {
+    showMessage('registerMessage', '该账号已被注册', 'error');
+    return;
+  }
+
+  var user = {
+    username: username,
+    password: password,
+    email: email,
+    type: registerType,
+    regTime: new Date().toLocaleString('zh-CN')
+  };
+
+  users.push(user);
+  localStorage.setItem('hago_users', JSON.stringify(users));
+
+  showMessage('registerMessage', '注册成功，请登录', 'success');
+  setTimeout(function() {
+    closeModal('registerModal');
+    showLogin();
+    document.getElementById('registerUsername').value = '';
+    document.getElementById('registerPassword').value = '';
+    document.getElementById('registerConfirmPassword').value = '';
+    document.getElementById('registerEmail').value = '';
+  }, 1500);
+}
+
+function login() {
+  var username = document.getElementById('loginUsername').value.trim();
+  var password = document.getElementById('loginPassword').value;
+
+  if (!username || !password) {
+    showMessage('loginMessage', '请填写账号和密码', 'error');
+    return;
+  }
+
+  var users = JSON.parse(localStorage.getItem('hago_users')) || [];
+  var user = users.find(function(u) {
+    return u.username === username && u.password === password && u.type === loginType;
+  });
+
+  if (!user) {
+    showMessage('loginMessage', '账号或密码错误，请检查账号类型是否正确', 'error');
+    return;
+  }
+
+  currentUser = user;
+  localStorage.setItem('hago_user', JSON.stringify(user));
+  showUserInfo();
+  closeModal('loginModal');
+  document.getElementById('loginUsername').value = '';
+  document.getElementById('loginPassword').value = '';
+}
+
+function logout() {
+  currentUser = null;
+  localStorage.removeItem('hago_user');
+  document.getElementById('loginBtn').style.display = 'block';
+  document.getElementById('logoutBtn').style.display = 'none';
+  document.getElementById('userInfo').style.display = 'none';
+  document.getElementById('accountSection').style.display = 'none';
+}
+
+function showUserInfo() {
+  document.getElementById('loginBtn').style.display = 'none';
+  document.getElementById('logoutBtn').style.display = 'block';
+  document.getElementById('userInfo').style.display = 'block';
+  document.getElementById('userInfo').textContent = currentUser.username;
+
+  document.getElementById('accountSection').style.display = 'block';
+  document.getElementById('accUsername').textContent = currentUser.username;
+  
+  var typeBadge = '<span class="account-badge ' + (currentUser.type === 'studio' ? 'studio' : 'normal') + '">' + 
+    (currentUser.type === 'studio' ? '工作室账号' : '普通账号') + '</span>';
+  document.getElementById('accType').innerHTML = typeBadge;
+  
+  document.getElementById('accEmail').textContent = currentUser.email;
+  document.getElementById('accRegTime').textContent = currentUser.regTime;
+}
+
+window.addEventListener('DOMContentLoaded', init);
+</script>
+
 </body>
 </html>
