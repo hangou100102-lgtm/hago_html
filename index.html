@@ -6,6 +6,22 @@
 <title>HAGO Studio</title>
 
 <style>
+/* 全局移除默认蓝色焦点轮廓与点击高亮 */
+*, *:focus, *:active {
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+/* 自定义焦点指示器，保持键盘可访问性 */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #3aa6a6 !important;
+  outline-offset: 2px !important;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -53,6 +69,15 @@ body.dark-mode header {
 .header-center {
   display: flex;
   align-items: center;
+}
+
+.header-logo-text {
+  color: #000;
+  transition: color 0.3s;
+}
+
+body.dark-mode .header-logo-text {
+  color: #fff;
 }
 
 .header-right {
@@ -570,6 +595,50 @@ body.dark-mode .sidebar-menu li a:hover {
   color: white;
 }
 
+/* 侧边栏中的按钮样式与链接一致 */
+.sidebar-menu li button {
+  display: block;
+  width: 100%;
+  padding: 15px 20px;
+  border: none;
+  background: transparent;
+  color: #333;
+  text-decoration: none;
+  font-size: 16px;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+body.dark-mode .sidebar-menu li button {
+  color: #fff;
+}
+
+.sidebar-menu li button:hover {
+  background: #f5f5f5;
+}
+
+body.dark-mode .sidebar-menu li button:hover {
+  background: #333;
+}
+
+/* 强制保证侧边栏及其链接可点击，防止遮罩或上层元素拦截 */
+.sidebar,
+.sidebar a,
+.sidebar-menu,
+.sidebar-menu li,
+.sidebar-menu li a {
+  pointer-events: auto !important;
+}
+
+.sidebar {
+  z-index: 3000 !important;
+}
+
+.sidebar-overlay {
+  z-index: 2500 !important;
+}
+
 /* 菜单分隔线 */
 .sidebar-divider {
   height: 1px;
@@ -615,11 +684,11 @@ body.dark-mode .sidebar-footer p {
     <li><a href="#home">首页</a></li>
     <li><a href="#about">关于我们</a></li>
     <li><a href="#services">服务项目</a></li>
-    <li><a href="#contact">联系我们</a></li>
-    <li><a href="#" onclick="openAccountModal()">账号管理</a></li>
-    <li><a href="settings.html">设置</a></li>
     <li><a href="#projects">项目作品</a></li>
     <li><a href="#team">团队成员</a></li>
+    <li><a href="#contact">联系我们</a></li>
+    <li><button type="button" onclick="openAccountModal()">账号管理</button></li>
+    <li><a href="settings.html">设置</a></li>
   </ul>
   <div class="sidebar-footer">
     <p>HAGo Studio</p>
@@ -631,17 +700,19 @@ body.dark-mode .sidebar-footer p {
 <header>
 
   <div class="header-left" onclick="toggleSidebar()">
-    <img src="assets/logo/1.png" alt="HAGo Logo" style="height: 35px; width: 35px;">
+    <svg width="35" height="35" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10.8 1.8H12.6V3.6H14.4V5.4H16.2V7.2H18V9H19.8V10.8H21.6V12.6H23.4V14.4H25.2V16.2H27V25.2H25.2V27H1.8V25.2H0V1.8H1.8V0H10.8V1.8ZM5.4 21.6H21.6V19.8H19.8V18H18V16.2H16.2V14.4H14.4V12.6H12.6V10.8H10.8V9H9V7.2H7.2V5.4H5.4V21.6ZM25.2 1.8H27V9H25.2V7.2H23.4V5.4H21.6V3.6H19.8V1.8H18V0H25.2V1.8Z" fill="#48BDC6"/>
+    </svg>
   </div>
 
   <div class="header-center">
-    <svg width="116" height="27" viewBox="0 0 116 27" fill="none"
+    <svg class="header-logo-text" width="116" height="27" viewBox="0 0 116 27" fill="none"
          xmlns="http://www.w3.org/2000/svg">
       <g clip-path="url(#clip0_1_1457)">
-        <path d="M5.27273 10.8H15.8182V12.6H17.5758V14.4H19.3333V16.2H5.27273V27H0V0H5.27273V10.8ZM26.3636 27H21.0909V0H26.3636V27Z" fill="black"/>
-        <path d="M54.4849 1.8H56.2424V3.6H58V27H52.7273V5.4H36.9091V10.8H47.4545V12.6H49.2121V14.4H50.9697V16.2H36.9091V27H31.6364V0H54.4849V1.8Z" fill="black"/>
-        <path d="M114.242 7.2H116V25.2H114.242V27H96.6667V25.2H94.9091V7.2H96.6667V5.4H114.242V7.2ZM100.182 21.6H110.727V10.8H100.182V21.6Z" fill="black"/>
-        <path d="M86.1212 1.8H87.8788V3.6H89.6364V9H86.1212V7.2H84.3636V5.4H68.5455V21.6H77.3333V23.4H79.0909V25.2H80.8485V27H66.7879V25.2H65.0303V23.4H63.2727V0H86.1212V1.8ZM86.1212 14.4H87.8788V16.2H89.6364V27H84.3636V18H77.3333V16.2H75.5758V14.4H73.8182V12.6H86.1212V14.4Z" fill="black"/>
+        <path d="M5.27273 10.8H15.8182V12.6H17.5758V14.4H19.3333V16.2H5.27273V27H0V0H5.27273V10.8ZM26.3636 27H21.0909V0H26.3636V27Z" fill="currentColor"/>
+        <path d="M54.4849 1.8H56.2424V3.6H58V27H52.7273V5.4H36.9091V10.8H47.4545V12.6H49.2121V14.4H50.9697V16.2H36.9091V27H31.6364V0H54.4849V1.8Z" fill="currentColor"/>
+        <path d="M114.242 7.2H116V25.2H114.242V27H96.6667V25.2H94.9091V7.2H96.6667V5.4H114.242V7.2ZM100.182 21.6H110.727V10.8H100.182V21.6Z" fill="currentColor"/>
+        <path d="M86.1212 1.8H87.8788V3.6H89.6364V9H86.1212V7.2H84.3636V5.4H68.5455V21.6H77.3333V23.4H79.0909V25.2H80.8485V27H66.7879V25.2H65.0303V23.4H63.2727V0H86.1212V1.8ZM86.1212 14.4H87.8788V16.2H89.6364V27H84.3636V18H77.3333V16.2H75.5758V14.4H73.8182V12.6H86.1212V14.4Z" fill="currentColor"/>
       </g>
       <defs>
         <clipPath id="clip0_1_1457">
@@ -713,7 +784,10 @@ body.dark-mode .sidebar-footer p {
   </div>
 </div>
 
-<div class="section about">
+<!-- 页面主体，首页锚点 -->
+<main id="home">
+
+<div class="section about" id="about">
   <h2># 关于工作室</h2>
   <p>
     我们工作室的名字叫「HAGo Studio」<br><br>
@@ -724,7 +798,18 @@ body.dark-mode .sidebar-footer p {
   </p>
 </div>
 
-<div class="section work">
+<div class="section" id="services">
+  <h2># 服务项目</h2>
+  <p>
+    游戏原型设计与开发<br><br>
+    《创游世界》脚本与玩法定制<br><br>
+    UniApp 跨平台应用开发<br><br>
+    游戏美术、UI 与界面设计<br><br>
+    玩法策划、数值平衡与测试反馈
+  </p>
+</div>
+
+<div class="section work" id="projects">
   <h2># 代表作品集</h2>
   <div class="works">
     <div class="work-item"></div>
@@ -733,8 +818,18 @@ body.dark-mode .sidebar-footer p {
   </div>
 </div>
 
-<div class="section info">
-  <h2># 常规信息</h2>
+<div class="section" id="team">
+  <h2># 团队成员</h2>
+  <p>
+    创始人 / 主策划：负责工作室整体方向与项目策划<br><br>
+    程序开发：使用《创游世界》引擎与 UniApp 实现游戏与软件功能<br><br>
+    美术设计：负责角色、场景、UI 与视觉表现<br><br>
+    我们是一群热爱游戏创作的伙伴，欢迎志同道合的朋友加入
+  </p>
+</div>
+
+<div class="section info" id="contact">
+  <h2># 联系我们</h2>
   <p>
     成立时间：2023年10月15日<br><br>
     工作室定位：游戏开发、软件制作<br><br>
@@ -765,6 +860,8 @@ body.dark-mode .sidebar-footer p {
     </div>
   </div>
 </div>
+
+</main>
 
 <script>
 var loginType = 'normal';
