@@ -12,6 +12,26 @@
 <link rel="stylesheet" href="styles.css">
 
 <style>
+/* 全局禁止图标被选中/复制/拖拽 */
+img, svg {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 侧边栏及交互元素禁止文本选中 */
+.sidebar, .sidebar-menu, .sidebar-footer, .sidebar-overlay,
+.header-logo-text, .account-btn, .contact-email a, button {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
 /* 设置页特有样式：设置项、开关、返回按钮 */
 
 .setting-item {
