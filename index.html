@@ -724,7 +724,7 @@ body.dark-mode .theme-toggle .icon-moon { display: block; }
     <li><a href="#home">首页</a></li>
     <li><a href="#about">关于我们</a></li>
     <li><a href="#team">团队成员</a></li>
-    <li><a href="#accountSection">账号管理</a></li>
+    <li style="display: none;"><a href="#accountSection">账号管理</a></li>
     <li><a href="settings.html">设置</a></li>
   </ul>
   <div class="sidebar-footer">
@@ -769,7 +769,7 @@ body.dark-mode .theme-toggle .icon-moon { display: block; }
         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
       </svg>
     </button>
-    <button id="loginBtn" class="account-btn" style="display: block;">登录</button>
+    <button id="loginBtn" class="account-btn" style="display: none;">登录</button>
     <button id="logoutBtn" class="account-btn logout" style="display: none;">退出</button>
     <div id="userInfo" style="display: none; margin-right: 15px; font-size: 14px; color: #333;"></div>
   </div>
@@ -900,11 +900,8 @@ var registerType = 'normal';
 var currentUser = null;
 
 function init() {
-  checkLoginStatus();
   loadDarkMode();
   loadAdvancedMaterials();
-  document.getElementById('loginBtn').addEventListener('click', showLogin);
-  document.getElementById('logoutBtn').addEventListener('click', logout);
 }
 
 function checkLoginStatus() {
